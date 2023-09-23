@@ -2,6 +2,7 @@ from application_properties import mongo_config
 import certifi
 from pymongo.mongo_client import MongoClient
 
+
 class DbConnection:
     CA = certifi.where()
     URI = f'mongodb+srv://host:{mongo_config["pass"]}@cluster0.v22zda7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
@@ -26,8 +27,12 @@ class UsersDao:
         self.COLLECTION = self.DB['users']
 
     def insert_one(self, user):
-        self.COLLECTION.insert_one(user)
-        return user
+        results = [user for user in self.find_any(user)]
+        if len(results) == 0:
+            self.COLLECTION.insert_one(user)
+            return user
+        else:
+            return None
 
     def find_any(self, user):
         return [user for user in self.COLLECTION.find(user)]
