@@ -1,6 +1,9 @@
 import streamlit as st
-import streamlit_authenticator as stauth
+# import streamlit_authenticator as stauth
 import streamlit.components.v1 as components
+from mongo.dbconfig import UsersDao
+
+users_dao = UsersDao()
 
 st.markdown("# Where's My Alien?!")
 components.html('''  
@@ -72,9 +75,22 @@ Once signed in, you can:
    
    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
 
+
+def verify():
+   user = {
+      'username': st.session_state.login_username,
+      'pass': st.session_state.login_password,
+    }
+   print(users_dao.find_any(user))
+
 with tab3:
-   st.header("Login")
-   st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+   with st.form("Login"):
+      login_username = st.text_input('Username')
+      login_password = st.text_input('Password', type='password')
+      st.form_submit_button('Login', on_click=verify)
+   
 
 with tab4:
    st.header("Test")
+
+
