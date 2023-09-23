@@ -1,12 +1,12 @@
-
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 import application_properties
+import certifi
+from pymongo.mongo_client import MongoClient
 
-uri = f'mongodb+srv://host:{mongo_creds["pass"]}@cluster0.v22zda7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
+ca = certifi.where()
+uri = f'mongodb+srv://host:{application_properties.mongo_config["pass"]}@cluster0.v22zda7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
 
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(uri, tlsCAFile=ca)
 
 # Send a ping to confirm a successful connection
 try:
