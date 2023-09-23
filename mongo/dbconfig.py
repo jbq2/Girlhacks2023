@@ -1,11 +1,12 @@
-from application_properties import mongo_config
+# from application_properties import mongo_config
 import certifi
 from pymongo.mongo_client import MongoClient
 
 
 class DbConnection:
     CA = certifi.where()
-    URI = f'mongodb+srv://host:{mongo_config["pass"]}@cluster0.v22zda7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
+    # URI = f'mongodb+srv://host:{mongo_config["pass"]}@cluster0.v22zda7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
+    URI = f'mongodb+srv://host:IVvkndG0Q7NNw4Xp@cluster0.v22zda7.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp'
     client = MongoClient(URI, tlsCAFile=CA)
 
     def __init__(self):
