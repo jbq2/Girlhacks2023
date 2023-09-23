@@ -9,4 +9,5 @@ test_user = {
     'username': 'urmom2',
     'pass': 'urmomagain2',
 }
-user_dao.insert(test_user)
+
+print(user_dao.find_any({}))

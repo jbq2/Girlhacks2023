@@ -25,6 +25,10 @@ class UsersDao:
         self.DB = self.DB_CONN.get_db()
         self.COLLECTION = self.DB['users']
 
-    def insert(self, user):
+    def insert_one(self, user):
         self.COLLECTION.insert_one(user)
+        return user
+
+    def find_any(self, user):
+        return [user for user in self.COLLECTION.find(user)]
     
