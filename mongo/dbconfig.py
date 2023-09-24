@@ -41,7 +41,7 @@ class UsersDao:
             print(e)
             return None
 
-    def find_any(self, user):
+    def find_any(self, user={}):
         return [user for user in self.COLLECTION.find(user)]
 
 
@@ -63,5 +63,26 @@ class ImagesDao:
             return None
 
     
-    def find_any(self, image):
+    def find_any(self, image={}):
         return [image for image in self.COLLECTION.find(image)]
+
+class LeaderboardDao:
+
+    def __init__(self):
+        self.DB_CONN = DbConnection()
+        self.DB = self.DB_CONN.get_db()
+        self.COLLECTION = self.DB['leaderboard']
+    
+    def insert_one(self, stat):
+        try:
+            res = self.COLLECTION.insert_one(stat)
+            if not res.inserted_id:
+                raise Exception
+            return stat
+        except Exception as e:
+            print(e)
+            return None
+
+
+    def find_any(self, stat={}):
+        return [stat for stat in self.COLLECTION.find(stat)]
