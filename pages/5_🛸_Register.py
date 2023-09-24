@@ -2,9 +2,9 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import streamlit.components.v1 as components
 import sys
-import sys
 sys.path.append('..')
-from mongo.dbconfig import ImagesDao, UsersDao, LeaderboardDao, DbConnection
+from PIL import Image
+from mongo.dbconfig import UsersDao, DbConnection, ImagesDao, LeaderboardDao
 
 @st.cache_resource
 def cache_db_conn():
@@ -21,7 +21,6 @@ def cache_daos(_db_conn):
     }
 
 DAOS = cache_daos(DB_CONN)
-
 st.markdown("""
         <style>
                .block-container {
@@ -34,13 +33,13 @@ st.markdown("<h1 style='text-align: center;'>Register</h1>", unsafe_allow_html=T
 
 def verify(register_username, register_password):
 	if register_username and register_password:
-		users_dao = DAOS['USERS_DAO']
+		users_dao = UsersDao(DB_CONN)
 		user = {
 			'username': register_username,
-			'pass': register_password,
+			'password': register_password,
 		}
 
-		if (len(users_dao.find_any(user)) == False):
+		if not users_dao.find_any(user):
 			users_dao.insert_one(user)
 			print("success in creating account")
 			st.success('Account created successfully')
@@ -51,8 +50,8 @@ def verify(register_username, register_password):
 with st.form("Register"):
 	register_username = st.text_input('Username')
 	register_password = st.text_input('Password', type='password')
-	flag = st.form_submit_button('Login')
-
+	flag = st.form_submit_button('Register')
+	
 if flag:
         verify(register_username, register_password)  
 

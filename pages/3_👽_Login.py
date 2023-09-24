@@ -8,6 +8,25 @@ from mongo.dbconfig import UsersDao
 from st_pages import Page, show_pages, add_page_title
 from time import sleep
 from streamlit_extras.switch_page_button import switch_page
+from mongo.dbconfig import UsersDao
+from mongo.dbconfig import DbConnection, ImagesDao, LeaderboardDao
+
+@st.cache_resource
+def cache_db_conn():
+       return DbConnection()
+
+DB_CONN = cache_db_conn()
+
+@st.cache_resource
+def cache_daos(_db_conn):
+    return {
+        'USERS_DAO': UsersDao(_db_conn),
+        'IMAGES_DAO': ImagesDao(_db_conn),
+        'LEADERBOARD_DAO': LeaderboardDao(_db_conn)
+    }
+
+DAOS = cache_daos(DB_CONN)
+
 
 st.markdown("""
         <style>
@@ -28,10 +47,10 @@ st.markdown("<h1 style='text-align: center;'>Login</h1>", unsafe_allow_html=True
 
 def verify(login_username, login_password):
    if login_username and login_password:
-        users_dao = UsersDao()
+        users_dao = UsersDao(DB_CONN)
         user = {
         'username': login_username,
-        'pass': login_password,
+        'password': login_password,
         }
 
         if users_dao.find_any(user):
@@ -66,6 +85,7 @@ if st.session_state.logged_in:
                 # Page("pages/3_👽_Login.py", "Login", "👽"),
                 Page("pages/4_🎮_Play.py", "Play", "🎮"),
                 # Page("pages/5_🛸_Register.py", "Register", "🛸"),
+                Page("pages/6_⬆️_Upload.py", "Upload", "⬆️")
         ])
         sleep(1)
         switch_page('Home')

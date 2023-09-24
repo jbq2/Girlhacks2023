@@ -1,0 +1,32 @@
+
+<html>
+    <body>
+        <canvas id="canvas" width="600" height="600"
+            style="background-color: white">
+        </canvas>
+        <script type="text/javascript">
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            const image = new Image();
+            image.src = "https://cdn.discordapp.com/attachments/1153737878099218473/1155351824736456785/alien.png"
+            let aliens = []
+
+            function make_base() {{
+                base_image = new Image();
+                base_image.src = 'data:image/png;base64,' + streamlit.getConfiguration().image_base64;
+                base_image.onload = function() {{
+                    // First, draw the base image
+                    ctx.drawImage(base_image, 0, 0, canvas.width, canvas.height);
+
+                    // Then, draw the aliens on top of the base image
+                    for (let k = 0; k < aliens.length; k++) {{
+                        let newAlien = aliens[k];
+                        ctx.drawImage(image, newAlien.x - (newAlien.s/2), newAlien.y - (newAlien.s/2), newAlien.s, newAlien.s);
+                    }}
+                }}
+            }}
+            make_base();
+            // Rest of the JavaScript remains unchanged...
+        </script>
+    </body>
+</html>
