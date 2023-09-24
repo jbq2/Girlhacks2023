@@ -37,4 +37,18 @@ class UsersDao:
 
     def find_any(self, user):
         return [user for user in self.COLLECTION.find(user)]
+
+
+class ImagesDao:
+
+    def __init__(self):
+        self.DB_CONN = DbConnection()
+        self.DB = self.DB_CONN.get_db()
+        self.COLLECTION = self.DB['images']
     
+    def insert_one(self, image):
+        self.COLLECTION.insert_one(image)
+        return image
+    
+    def find_any(self, image):
+        return [image for image in self.COLLECTION.find(image)]
