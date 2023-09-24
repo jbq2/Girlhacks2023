@@ -2,9 +2,25 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import streamlit.components.v1 as components
 import sys
+import sys
 sys.path.append('..')
-from PIL import Image
-from mongo.dbconfig import UsersDao
+from mongo.dbconfig import ImagesDao, UsersDao, LeaderboardDao, DbConnection
+
+@st.cache_resource
+def cache_db_conn():
+       return DbConnection()
+
+DB_CONN = cache_db_conn()
+
+@st.cache_resource
+def cache_daos(_db_conn):
+    return {
+        'USERS_DAO': UsersDao(_db_conn),
+        'IMAGES_DAO': ImagesDao(_db_conn),
+        'LEADERBOARD_DAO': LeaderboardDao(_db_conn)
+    }
+
+DAOS = cache_daos(DB_CONN)
 
 st.markdown("""
         <style>
@@ -18,7 +34,7 @@ st.markdown("<h1 style='text-align: center;'>Register</h1>", unsafe_allow_html=T
 
 def verify(register_username, register_password):
 	if register_username and register_password:
-		users_dao = UsersDao()
+		users_dao = DAOS['USERS_DAO']
 		user = {
 			'username': register_username,
 			'pass': register_password,

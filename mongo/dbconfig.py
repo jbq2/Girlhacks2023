@@ -22,8 +22,8 @@ class DbConnection:
 
 class UsersDao:
     
-    def __init__(self):
-        self.DB_CONN = DbConnection()
+    def __init__(self, db_conn: DbConnection):
+        self.DB_CONN = db_conn
         self.DB = self.DB_CONN.get_db()
         self.COLLECTION = self.DB['users']
 
@@ -43,8 +43,8 @@ class UsersDao:
 
 class ImagesDao:
 
-    def __init__(self):
-        self.DB_CONN = DbConnection()
+    def __init__(self, db_conn: DbConnection):
+        self.DB_CONN = db_conn
         self.DB = self.DB_CONN.get_db()
         self.COLLECTION = self.DB['images']
     
@@ -64,8 +64,8 @@ class ImagesDao:
 
 class LeaderboardDao:
 
-    def __init__(self):
-        self.DB_CONN = DbConnection()
+    def __init__(self, db_conn: DbConnection):
+        self.DB_CONN = db_conn
         self.DB = self.DB_CONN.get_db()
         self.COLLECTION = self.DB['leaderboard']
     
