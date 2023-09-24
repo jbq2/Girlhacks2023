@@ -35,6 +35,7 @@ if not st.session_state.logged_in:
             Page("pages/3_👽_Login.py", "Login", "👽"),
             # Page("pages\4_🎮_Play.py", "Instructions", "🎮"),
             Page("pages/5_🛸_Register.py", "Register", "🛸"),
+            Page("pages/7_Leaderboard.py", "Leaderboard", "⬆️")
         ]
     )
 st.markdown("<h1 style='text-align: center;'>Find My Alien!!!</h1>", unsafe_allow_html=True)

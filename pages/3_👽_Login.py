@@ -85,7 +85,8 @@ if st.session_state.logged_in:
                 # Page("pages/3_👽_Login.py", "Login", "👽"),
                 Page("pages/4_🎮_Play.py", "Play", "🎮"),
                 # Page("pages/5_🛸_Register.py", "Register", "🛸"),
-                Page("pages/6_⬆️_Upload.py", "Upload", "⬆️")
+                Page("pages/6_⬆️_Upload.py", "Upload", "⬆️"),
+                Page("pages/7_Leaderboard.py", "Leaderboard", "⬆️")
         ])
         sleep(1)
         switch_page('Home')
