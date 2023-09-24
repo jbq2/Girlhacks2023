@@ -18,12 +18,12 @@ st.markdown("""
         """, unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Login</h1>", unsafe_allow_html=True)
 
-class SessionState:
-    def __init__(self):
-        self.logged_in = False
+# class SessionState:
+#     def __init__(self):
+#         self.logged_in = False
 
-# Initialize the session state
-session_state = SessionState()
+# # Initialize the session state
+# session_state = SessionState()
 
 def verify(login_username, login_password):
    if login_username and login_password:
@@ -36,7 +36,7 @@ def verify(login_username, login_password):
         if users_dao.find_any(user):
              print("Success")
              st.success('Success wooop woop')
-             session_state.logged_in = True
+             st.session_state.logged_in = True
         else:
              print("Failure")
              st.error('Username/Password Combination Invalid')
@@ -52,8 +52,9 @@ with st.form("Login"):
 if flag:
         verify(login_username, login_password)  
 
-if session_state.logged_in:
-        st.sidebar.markdown("Logged in as: " + login_username)
+if st.session_state.logged_in:
+        st.session_state.username = login_username
+        st.sidebar.markdown("Logged in as: " + st.session_state.username)
         show_pages(
         [
                 # Page("1_🌌_Home.py", "Home", "🌌"),
@@ -62,5 +63,6 @@ if session_state.logged_in:
                 # Page("pages/3_👽_Login.py", "Login", "👽"),
                 Page("pages/4_🎮_Play.py", "Play", "🎮"),
                 # Page("pages/5_🛸_Register.py", "Register", "🛸"),
-        ]
-)
+        ])
+        st.session_state.username = login_username
+        print(st.session_state.username)

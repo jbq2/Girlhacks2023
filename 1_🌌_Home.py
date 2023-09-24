@@ -18,14 +18,16 @@ rain(
     animation_length="infinite",
 )
 
-class SessionState:
-    def __init__(self):
-        self.logged_in = False
+# class SessionState:
+#     def __init__(self):
+#         self.logged_in = False
 
-# Initialize the session state
-session_state = SessionState()
+# # Initialize the session state
+# session_state = SessionState()
 
-if not session_state.logged_in:
+st.session_state.logged_in = False
+
+if not st.session_state.logged_in:
     show_pages(
         [
             Page("1_🌌_Home.py", "Home", "🌌"),

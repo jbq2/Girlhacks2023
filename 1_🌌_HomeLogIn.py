@@ -85,4 +85,5 @@ if st.button("Instructions"):
 #     # session_state.key = True
 #         switch_page('login')
 
-
+if st.session_state.logged_in:
+    st.sidebar.markdown("Logged in as: " + st.session_state.username)

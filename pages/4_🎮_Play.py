@@ -125,3 +125,6 @@ components.html(
 st.markdown("## Instructions")
 st.markdown("Look for and click on all the aliens!")
 st.markdown("Your time will be submitted on the leaderboard once you finish!")
+
+if st.session_state.logged_in:
+    st.sidebar.markdown("Logged in as: " + st.session_state.username)
