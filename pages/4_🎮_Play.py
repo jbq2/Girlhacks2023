@@ -1,8 +1,11 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from st_pages import Page, show_pages, add_page_title
+import streamlit_component.my_game_component as my_game_component
 
 st.markdown("# Where's My Alien?!")
+result = my_game_component.my_game_component()
+st.write(result)
 
 components.html(
     """
