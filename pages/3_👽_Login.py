@@ -17,18 +17,27 @@ st.markdown("""
 st.markdown("<h1 style='text-align: center;'>Login</h1>", unsafe_allow_html=True)
 
 def verify(login_username, login_password):
-   users_dao = UsersDao()
-   user = {
-      'username': login_username,
-      'pass': login_password,
-    }
+   if login_username and login_password:
+        users_dao = UsersDao()
+        user = {
+        'username': login_username,
+        'pass': login_password,
+        }
 
-   print(users_dao.find_any(user))
+        if users_dao.find_any(user):
+             print("Success")
+             st.success('Success wooop woop')
+        else:
+             print("Failure")
+             st.error('Username/Password Combination Invalid')
+   else:
+        st.warning("No credentials provided")
+   
    
 with st.form("Login"):
         login_username = st.text_input('Username')
         login_password = st.text_input('Password', type='password')
-        submit = st.form_submit_button('Login')
+        flag = st.form_submit_button('Login')
 
-if submit:
-      verify(login_username, login_password)
+if flag:
+        verify(login_username, login_password)  
