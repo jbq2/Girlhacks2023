@@ -8,15 +8,6 @@ const MyComponent = ({ args }) => {
     const ctx = canvas.getContext("2d");
     canvas.width = 600;
     canvas.height = 600;
-    const base_image = new Image();
-    base_image.src = args.baseImageSrc;
-    base_image.onload = function () {
-      ctx.drawImage(base_image, 0, 0, canvas.width, canvas.height);
-      for (let k = 0; k < aliens.length; k++) {
-        let newAlien = aliens[k];
-        ctx.drawImage(image, newAlien.x - newAlien.s / 2, newAlien.y - newAlien.s / 2, newAlien.s, newAlien.s);
-      }
-    };
     const image = new Image();
     image.src = args.imageSrc;
     Streamlit.setFrameHeight()
@@ -30,7 +21,7 @@ const MyComponent = ({ args }) => {
 
     function make_base() {
       const base_image = new Image();
-      base_image.src = args.baseImageSrc;
+      base_image.src = `data:image/png;base64,${args.baseImageSrc}`;
       base_image.onload = function () {
         ctx.drawImage(base_image, 0, 0, canvas.width, canvas.height);
         for (let k = 0; k < aliens.length; k++) {
@@ -75,6 +66,7 @@ const MyComponent = ({ args }) => {
           let alien = aliens[i];
           if (alienCheck(alien, point)) {
             aliens.splice(i, 1);
+            Streamlit.setComponentValue(aliens);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             make_base();
           }
