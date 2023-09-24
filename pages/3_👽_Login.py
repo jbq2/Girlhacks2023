@@ -5,6 +5,7 @@ import sys
 sys.path.append('..')
 from PIL import Image
 from mongo.dbconfig import UsersDao
+from st_pages import Page, show_pages, add_page_title
 
 st.markdown("""
         <style>
@@ -16,12 +17,12 @@ st.markdown("""
         """, unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Login</h1>", unsafe_allow_html=True)
 
-class SessionState:
-    def __init__(self):
-        self.logged_in = False
+# class SessionState:
+#     def __init__(self):
+#         self.logged_in = False
 
-# Initialize the session state
-session_state = SessionState()
+# # Initialize the session state
+# session_state = SessionState()
 
 def verify(login_username, login_password):
    if login_username and login_password:
@@ -52,3 +53,12 @@ if flag:
 
 if session_state.logged_in:
         st.sidebar.markdown("Logged in as: " + login_username)
+        show_pages(
+        [
+                Page("1_🌌_Home.py", "Home", "🌌"),
+                Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
+                # Page("pages/3_👽_Login.py", "Login", "👽"),
+                Page("pages/4_🎮_Play.py", "Play", "🎮"),
+                # Page("pages/5_👽_Register.py", "Register", "👽"),
+        ]
+)

@@ -3,14 +3,40 @@ import streamlit_authenticator as stauth
 import streamlit.components.v1 as components
 from streamlit_extras.switch_page_button import switch_page
 from PIL import Image
+from streamlit_extras.let_it_rain import rain
+from st_pages import Page, show_pages, add_page_title
 
 st.set_page_config (
    page_title="Find My Alien!!!",
    page_icon="👽"
 )
 
+rain(
+    emoji="🛸",
+    font_size=54,
+    falling_speed=8,
+    animation_length="infinite",
+)
+
+class SessionState:
+    def __init__(self):
+        self.logged_in = False
+
+# Initialize the session state
+session_state = SessionState()
+
+if not session_state.logged_in:
+    show_pages(
+        [
+            Page("1_🌌_Home.py", "Home", "🌌"),
+            Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
+            Page("pages/3_👽_Login.py", "Login", "👽"),
+            # Page("pages\4_🎮_Play.py", "Instructions", "🎮"),
+            Page("pages/5_👽_Register.py", "Register", "👽"),
+        ]
+    )
 st.markdown("<h1 style='text-align: center;'>Find My Alien!!!</h1>", unsafe_allow_html=True)
-st.sidebar.success("Select a page above.")
+# st.sidebar.success("Select a page above.")
 st.markdown("""
         <style>
                .block-container {
