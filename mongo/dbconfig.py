@@ -22,17 +22,13 @@ class DbConnection:
 
 class UsersDao:
     
-    def __init__(self):
-        self.DB_CONN = DbConnection()
+    def __init__(self, db_conn: DbConnection):
+        self.DB_CONN = db_conn
         self.DB = self.DB_CONN.get_db()
         self.COLLECTION = self.DB['users']
 
     def insert_one(self, user):
-        results = [user for user in self.find_any(user)]
-
         try:
-            if len(results) > 0:
-                raise Exception
             res = self.COLLECTION.insert_one(user)
             if not res.inserted_id:
                 raise Exception
@@ -41,14 +37,14 @@ class UsersDao:
             print(e)
             return None
 
-    def find_any(self, user):
+    def find_any(self, user={}):
         return [user for user in self.COLLECTION.find(user)]
 
 
 class ImagesDao:
 
-    def __init__(self):
-        self.DB_CONN = DbConnection()
+    def __init__(self, db_conn: DbConnection):
+        self.DB_CONN = db_conn
         self.DB = self.DB_CONN.get_db()
         self.COLLECTION = self.DB['images']
     
@@ -63,5 +59,26 @@ class ImagesDao:
             return None
 
     
-    def find_any(self, image):
+    def find_any(self, image={}):
         return [image for image in self.COLLECTION.find(image)]
+
+class LeaderboardDao:
+
+    def __init__(self, db_conn: DbConnection):
+        self.DB_CONN = db_conn
+        self.DB = self.DB_CONN.get_db()
+        self.COLLECTION = self.DB['leaderboard']
+    
+    def insert_one(self, stat):
+        try:
+            res = self.COLLECTION.insert_one(stat)
+            if not res.inserted_id:
+                raise Exception
+            return stat
+        except Exception as e:
+            print(e)
+            return None
+
+
+    def find_any(self, stat={}):
+        return [stat for stat in self.COLLECTION.find(stat)]
