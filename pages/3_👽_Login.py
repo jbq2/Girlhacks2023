@@ -28,4 +28,7 @@ def verify(login_username, login_password):
 with st.form("Login"):
         login_username = st.text_input('Username')
         login_password = st.text_input('Password', type='password')
-        st.form_submit_button('Login', on_click=verify(login_username, login_password))
+        submit = st.form_submit_button('Login')
+
+if submit:
+      verify(login_username, login_password)
