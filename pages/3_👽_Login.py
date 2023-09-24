@@ -16,6 +16,13 @@ st.markdown("""
         """, unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center;'>Login</h1>", unsafe_allow_html=True)
 
+class SessionState:
+    def __init__(self):
+        self.logged_in = False
+
+# Initialize the session state
+session_state = SessionState()
+
 def verify(login_username, login_password):
    if login_username and login_password:
         users_dao = UsersDao()
@@ -27,6 +34,7 @@ def verify(login_username, login_password):
         if users_dao.find_any(user):
              print("Success")
              st.success('Success wooop woop')
+             session_state.logged_in = True
         else:
              print("Failure")
              st.error('Username/Password Combination Invalid')
@@ -41,3 +49,6 @@ with st.form("Login"):
 
 if flag:
         verify(login_username, login_password)  
+
+if session_state.logged_in:
+        st.sidebar.markdown("Logged in as: " + login_username)
