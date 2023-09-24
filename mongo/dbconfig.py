@@ -29,10 +29,16 @@ class UsersDao:
 
     def insert_one(self, user):
         results = [user for user in self.find_any(user)]
-        if len(results) == 0:
-            self.COLLECTION.insert_one(user)
+
+        try:
+            if len(results) > 0:
+                raise Exception
+            res = self.COLLECTION.insert_one(user)
+            if not res.inserted_id:
+                raise Exception
             return user
-        else:
+        except Exception as e:
+            print(e)
             return None
 
     def find_any(self, user):
@@ -47,8 +53,15 @@ class ImagesDao:
         self.COLLECTION = self.DB['images']
     
     def insert_one(self, image):
-        self.COLLECTION.insert_one(image)
-        return image
+        try:
+            res = self.COLLECTION.insert_one(image)
+            if not res.inserted_id:
+                raise Exception
+            return image
+        except Exception as e:
+            print(e)
+            return None
+
     
     def find_any(self, image):
         return [image for image in self.COLLECTION.find(image)]
