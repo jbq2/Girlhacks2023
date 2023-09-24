@@ -1,2 +1,4 @@
 mongo/application_properties.py
 __pycache__
+node_modules
+.cache
