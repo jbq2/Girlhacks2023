@@ -59,7 +59,8 @@ if st.session_state.logged_in:
         [
                 # Page("1_🌌_Home.py", "Home", "🌌"),
                 Page("1_🌌_HomeLogIn.py", "Home", "🌌"),
-                Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
+                # Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
+                Page("pages/2_👾_InstructionsLogIn.py", "Instructions", "👾"),
                 # Page("pages/3_👽_Login.py", "Login", "👽"),
                 Page("pages/4_🎮_Play.py", "Play", "🎮"),
                 # Page("pages/5_🛸_Register.py", "Register", "🛸"),

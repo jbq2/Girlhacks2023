@@ -29,15 +29,6 @@ Once signed in, you can:
   3. Press **Find Alien** and have fun!''')
 
 
-<<<<<<< HEAD
 # if st.button("Login"):
 #     # session_state.key = True
 #         switch_page('login')
-
-if st.session_state.logged_in:
-    st.sidebar.markdown("Logged in as: " + st.session_state.username)
-=======
-if st.button("Login"):
-    # session_state.key = True
-        switch_page('login')
->>>>>>> af1c50b676fc3d42e2d55b5e8668a76ee7e98e23
