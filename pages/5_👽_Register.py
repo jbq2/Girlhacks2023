@@ -17,22 +17,28 @@ st.markdown("""
 st.markdown("<h1 style='text-align: center;'>Register</h1>", unsafe_allow_html=True)
 
 def verify(register_username, register_password):
-	users_dao = UsersDao()
-	user = {
-      	'username': register_username,
-      	'pass': register_password,
-    }
+	if register_username and register_password:
+		users_dao = UsersDao()
+		user = {
+			'username': register_username,
+			'pass': register_password,
+		}
 
-	if (len(users_dao.find_any(user)) == False):
-		users_dao.insert_one(user)
-		print("success in creating account")
+		if (len(users_dao.find_any(user)) == False):
+			users_dao.insert_one(user)
+			print("success in creating account")
+			st.success('Account created successfully')
+		else:
+			st.error('Account already exists')
 	else:
-		print("error with creating account")
-
+		st.warning("Missing username/password")
 with st.form("Register"):
 	register_username = st.text_input('Username')
 	register_password = st.text_input('Password', type='password')
-	st.form_submit_button('Submit', on_click=verify(register_username, register_password))
+	flag = st.form_submit_button('Login')
+
+if flag:
+        verify(register_username, register_password)  
 
 
   
