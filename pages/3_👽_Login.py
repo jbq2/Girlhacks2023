@@ -31,7 +31,7 @@ def verify(login_username, login_password):
              print("Failure")
              st.error('Username/Password Combination Invalid')
    else:
-        st.warning("Missing username/password")
+        st.warning("No credentials provided")
    
    
 with st.form("Login"):
