@@ -28,11 +28,7 @@ class UsersDao:
         self.COLLECTION = self.DB['users']
 
     def insert_one(self, user):
-        results = [user for user in self.find_any(user)]
-
         try:
-            if len(results) > 0:
-                raise Exception
             res = self.COLLECTION.insert_one(user)
             if not res.inserted_id:
                 raise Exception
