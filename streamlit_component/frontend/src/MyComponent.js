@@ -20,7 +20,7 @@ const MyComponent = ({ args }) => {
     }
 
     function make_base() {
-      const base_image = new Image();
+      let base_image = new Image();
       base_image.src = `data:image/png;base64,${args.baseImageSrc}`;
       base_image.onload = function () {
         ctx.drawImage(base_image, 0, 0, canvas.width, canvas.height);
@@ -73,6 +73,10 @@ const MyComponent = ({ args }) => {
         }
       }
     });
+
+    return () => {
+      canvas.removeEventListener("mousedown");
+    }
   }, [args.imageSrc, args.baseImageSrc]);
 
   return (

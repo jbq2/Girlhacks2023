@@ -15,7 +15,6 @@ else:
         "mycomponent", path=build_dir
     )
 
-
 def my_component(image_src, base_image_src, key=None):
     component_value = _component_func(imageSrc=image_src, baseImageSrc=base_image_src, key=key)
     return component_value
