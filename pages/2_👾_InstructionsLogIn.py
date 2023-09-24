@@ -2,6 +2,8 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import streamlit.components.v1 as components
 from streamlit_extras.switch_page_button import switch_page
+from st_pages import Page, show_pages, add_page_title
+
 from PIL import Image
 
 st.markdown("""
@@ -35,3 +37,15 @@ Once signed in, you can:
 
 if st.session_state.logged_in:
         st.sidebar.markdown("Logged in as: " + st.session_state.username)
+        log_out = st.sidebar.button("Log Out")
+        if log_out:
+                show_pages(
+                    [
+                        Page("1_🌌_Home.py", "Home", "🌌"),
+                        Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
+                        Page("pages/3_👽_Login.py", "Login", "👽"),
+                        # Page("pages\4_🎮_Play.py", "Instructions", "🎮"),
+                        Page("pages/5_🛸_Register.py", "Register", "🛸"),
+                    ]
+                )
+                switch_page("Home")

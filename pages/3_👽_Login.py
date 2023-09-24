@@ -6,7 +6,8 @@ sys.path.append('..')
 from PIL import Image
 from mongo.dbconfig import UsersDao
 from st_pages import Page, show_pages, add_page_title
-
+from time import sleep
+from streamlit_extras.switch_page_button import switch_page
 
 st.markdown("""
         <style>
@@ -37,6 +38,7 @@ def verify(login_username, login_password):
              print("Success")
              st.success('Success wooop woop')
              st.session_state.logged_in = True
+
         else:
              print("Failure")
              st.error('Username/Password Combination Invalid')
@@ -65,5 +67,5 @@ if st.session_state.logged_in:
                 Page("pages/4_🎮_Play.py", "Play", "🎮"),
                 # Page("pages/5_🛸_Register.py", "Register", "🛸"),
         ])
-        st.session_state.username = login_username
-        print(st.session_state.username)
+        sleep(1)
+        switch_page('Home')
