@@ -29,6 +29,6 @@ Once signed in, you can:
   3. Press **Find Alien** and have fun!''')
 
 
-if st.button("Login"):
-    # session_state.key = True
-        switch_page('login')
+# if st.button("Login"):
+#     # session_state.key = True
+#         switch_page('login')

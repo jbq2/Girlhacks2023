@@ -18,23 +18,27 @@ rain(
     animation_length="infinite",
 )
 
-class SessionState:
-    def __init__(self):
-        self.logged_in = False
+# class SessionState:
+#     def __init__(self):
+#         self.logged_in = False
 
-# Initialize the session state
-session_state = SessionState()
+# # Initialize the session state
+# session_state = SessionState()
 
-if not session_state.logged_in:
-    show_pages(
-        [
-            Page("1_🌌_Home.py", "Home", "🌌"),
-            Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
-            Page("pages/3_👽_Login.py", "Login", "👽"),
-            # Page("pages\4_🎮_Play.py", "Instructions", "🎮"),
-            Page("pages/5_🛸_Register.py", "Register", "🛸"),
-        ]
-    )
+# @st.cache_resource
+# st.session_state.logged_in = False
+
+# if not st.session_state.logged_in:
+#     show_pages(
+#         [
+#             Page("1_🌌_Home.py", "Home", "🌌"),
+#             # Page("1_🌌_HomeLogIn.py", "Home", "🌌"),
+#             Page("pages/2_👾_Instructions.py", "Instructions", "👾"),
+#             Page("pages/3_👽_Login.py", "Login", "👽"),
+#             # Page("pages\4_🎮_Play.py", "Instructions", "🎮"),
+#             Page("pages/5_🛸_Register.py", "Register", "🛸"),
+#         ]
+#     )
 st.markdown("<h1 style='text-align: center;'>Find My Alien!!!</h1>", unsafe_allow_html=True)
 # st.sidebar.success("Select a page above.")
 st.markdown("""
@@ -77,8 +81,8 @@ if st.button("Instructions"):
     # session_state.key = True
         switch_page('instructions')
 
-if st.button("Login"):
-    # session_state.key = True
-        switch_page('login')
+# if st.button("Login"):
+#     # session_state.key = True
+#         switch_page('login')
 
 
