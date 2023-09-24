@@ -6,11 +6,13 @@ from pymongo import MongoClient
 import base64
 sys.path.append('..')
 from mongo.dbconfig import ImagesDao
+from mongo.dbconfig import DbConnection
 import streamlit.components.v1 as components
 import streamlit_component.my_component as my_component
 
 # connect to mongodb
-users_dao = ImagesDao()
+dbConn = DbConnection()
+images_dao = ImagesDao(dbConn)
 
 uploaded_file = st.file_uploader("Choose an image", type=["png","jpg"])
 
@@ -41,7 +43,7 @@ if submit_button:
         }
 
         try:
-            users_dao.insert_one(image_data)
+            images_dao.insert_one(image_data)
             st.success(f'Successfully Uploaded: {uploaded_file.name}')
         except:
             st.error(f'Failed Upload: {uploaded_file.name}')
