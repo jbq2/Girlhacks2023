@@ -11,5 +11,5 @@ Upload your own images and send it to friends to see if they can find your alien
 
 May the alien hunt begin!
 
-# MongoDb Configuration
-- run the following: python -m pip install pymongo
+### Devpost:
+https://devpost.com/software/find-my-alien
